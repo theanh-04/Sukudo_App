@@ -136,5 +136,4 @@ flutter devices
 
 ## Hỗ trợ
 
-Nếu gặp vấn đề, vui lòng tạo issue trên repository hoặc liên hệ team phát triển.
-# Sokudo_App
+
