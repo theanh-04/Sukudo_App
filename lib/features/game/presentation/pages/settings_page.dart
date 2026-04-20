@@ -1,12 +1,62 @@
+/**
+ * SETTINGS_PAGE.DART
+ * ==================
+ * 
+ * TỔNG QUAN:
+ * Màn hình Cài đặt - nơi người chơi có thể tùy chỉnh các thiết lập game và giao diện.
+ * Sử dụng SettingsService để lưu/load các cài đặt vào SharedPreferences.
+ * 
+ * TÍNH NĂNG CHÍNH:
+ * - Cài đặt Game:
+ *   + Âm thanh (soundEffects): Bật/tắt hiệu ứng âm thanh
+ *   + Hiển thị đồng hồ (timerDisplay): Hiển thị/ẩn đồng hồ đếm giờ
+ *   + Giới hạn sai (mistakesLimit): Giới hạn số lần sai tối đa (3 lần)
+ *   + Đánh dấu trùng (highlightDuplicates): Highlight các số trùng nhau
+ * 
+ * - Giao diện:
+ *   + Theme: Chọn giữa Sáng (light) và Tối (dark)
+ * 
+ * - Tài khoản & Hỗ trợ:
+ *   + Khôi phục mua hàng (chưa implement)
+ *   + Liên hệ hỗ trợ (chưa implement)
+ *   + Chính sách bảo mật (chưa implement)
+ *   + Giới thiệu (chưa implement)
+ * 
+ * LUỒNG HOẠT ĐỘNG:
+ * 1. Load settings từ SettingsService thông qua Consumer
+ * 2. Hiển thị các toggle switches và buttons với giá trị hiện tại
+ * 3. Khi người dùng thay đổi setting, gọi method tương ứng trong SettingsService
+ * 4. SettingsService lưu vào SharedPreferences và notify listeners
+ * 5. UI tự động cập nhật nhờ Consumer
+ * 
+ * CẤU TRÚC UI:
+ * - AppBar: Tiêu đề + nút back
+ * - Section 1: CÀI ĐẶT GAME
+ *   + 4 toggle settings trong một group
+ * - Section 2: GIAO DIỆN
+ *   + 2 theme buttons (Sáng/Tối)
+ * - Section 3: TÀI KHOẢN & HỖ TRỢ
+ *   + 4 action buttons
+ * - Footer: Version info
+ * 
+ * NOTES:
+ * - Đã xóa các setting: System theme, Font size, Language
+ * - Sử dụng Consumer để tự động cập nhật UI khi settings thay đổi
+ * - Tất cả settings được lưu vào SharedPreferences
+ */
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/services/settings_service.dart';
 
+/// Widget chính của màn hình Cài đặt
+/// Sử dụng Consumer để lắng nghe thay đổi từ SettingsService
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Consumer lắng nghe SettingsService và rebuild khi có thay đổi
     return Consumer<SettingsService>(
       builder: (context, settings, _) {
         return _SettingsPageContent(settings: settings);
@@ -15,6 +65,8 @@ class SettingsPage extends StatelessWidget {
   }
 }
 
+/// Widget nội dung của màn hình Cài đặt
+/// Nhận SettingsService từ parent để truy cập và cập nhật settings
 class _SettingsPageContent extends StatelessWidget {
   final SettingsService settings;
 

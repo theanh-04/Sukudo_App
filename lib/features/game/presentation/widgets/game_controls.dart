@@ -5,8 +5,9 @@ class GameControls extends StatelessWidget {
   final VoidCallback? onRedo;
   final VoidCallback onErase;
   final VoidCallback onToggleNotes;
-  final VoidCallback onHint;
+  final VoidCallback? onHint; // Có thể null khi hết lượt
   final bool notesMode;
+  final int hintsRemaining; // Số lượt gợi ý còn lại
 
   const GameControls({
     super.key,
@@ -16,6 +17,7 @@ class GameControls extends StatelessWidget {
     required this.onToggleNotes,
     required this.onHint,
     required this.notesMode,
+    this.hintsRemaining = 3, // Mặc định 3 lượt
   });
 
   @override
@@ -50,6 +52,7 @@ class GameControls extends StatelessWidget {
             icon: Icons.lightbulb_outline,
             label: 'Hint',
             onPressed: onHint,
+            badgeText: hintsRemaining > 0 ? '$hintsRemaining' : null,
           ),
         ],
       ),
@@ -63,8 +66,8 @@ class GameControls extends StatelessWidget {
     required VoidCallback? onPressed,
     bool isActive = false,
     bool showBadge = false,
+    String? badgeText, // Text hiển thị trong badge (VD: số lượt còn lại)
   }) {
-    final theme = Theme.of(context);
     final isEnabled = onPressed != null;
 
     return Material(
@@ -89,6 +92,7 @@ class GameControls extends StatelessWidget {
                             : const Color(0xFF49636F))
                         : const Color(0xFFACB3B7),
                   ),
+                  // Badge "ON" cho notes mode
                   if (showBadge)
                     Positioned(
                       top: -4,
@@ -106,6 +110,31 @@ class GameControls extends StatelessWidget {
                             fontSize: 8,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  // Badge số lượt còn lại (cho hint)
+                  if (badgeText != null)
+                    Positioned(
+                      top: -4,
+                      right: -4,
+                      child: Container(
+                        width: 18,
+                        height: 18,
+                        decoration: BoxDecoration(
+                          color: isEnabled ? const Color(0xFF005BC1) : Colors.grey,
+                          shape: BoxShape.circle,
+                          border: Border.all(color: Colors.white, width: 2),
+                        ),
+                        child: Center(
+                          child: Text(
+                            badgeText,
+                            style: const TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),

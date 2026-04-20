@@ -11,6 +11,10 @@ class SudokuProvider extends ChangeNotifier {
   bool _notesMode = false;
   int _mistakes = 0;
   final int _maxMistakes = 3;
+  
+  // Giới hạn số lần gợi ý
+  int _hintsUsed = 0;
+  final int _maxHints = 3; // Giới hạn 3 lần gợi ý
 
   List<Cell> get cells => _cells;
   Cell? get selectedCell => _selectedCell;
@@ -19,6 +23,9 @@ class SudokuProvider extends ChangeNotifier {
   bool get canRedo => _historyIndex > 0;
   int get mistakes => _mistakes;
   int get maxMistakes => _maxMistakes;
+  int get hintsUsed => _hintsUsed;
+  int get maxHints => _maxHints;
+  int get hintsRemaining => _maxHints - _hintsUsed;
   
   // Game over chỉ khi bật giới hạn sai
   bool get isGameOver {
@@ -33,6 +40,7 @@ class SudokuProvider extends ChangeNotifier {
     _selectedCell = null;
     _notesMode = false;
     _mistakes = 0;
+    _hintsUsed = 0; // Reset số lần gợi ý
     notifyListeners();
   }
 
@@ -100,8 +108,22 @@ class SudokuProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Gợi ý - điền số đúng vào ô đang chọn
+  /// 
+  /// GIỚI HẠN:
+  /// - Chỉ được dùng tối đa 3 lần (_maxHints)
+  /// - Không thể dùng khi đã hết lượt gợi ý
+  /// - Không thể dùng khi game over
+  /// - Không thể dùng trên ô ban đầu
   void giveHint() {
+    // Kiểm tra điều kiện
     if (_selectedCell == null || _selectedCell!.initial || isGameOver) return;
+    
+    // Kiểm tra đã hết lượt gợi ý chưa
+    if (_hintsUsed >= _maxHints) {
+      // Không thể gợi ý nữa
+      return;
+    }
 
     _addToHistory();
 
@@ -109,10 +131,14 @@ class SudokuProvider extends ChangeNotifier {
       (c) => c.x == _selectedCell!.x && c.y == _selectedCell!.y,
     );
 
+    // Điền số đúng vào ô
     _cells[index] = _cells[index].copyWith(
       number: _cells[index].solution,
       notes: [],
     );
+    
+    // Tăng số lần đã dùng gợi ý
+    _hintsUsed++;
 
     notifyListeners();
   }
@@ -164,6 +190,18 @@ class SudokuProvider extends ChangeNotifier {
   // Set mistakes (for resume)
   void setMistakes(int value) {
     _mistakes = value;
+    notifyListeners();
+  }
+  
+  // Reset hints (for restart)
+  void resetHints() {
+    _hintsUsed = 0;
+    notifyListeners();
+  }
+  
+  // Set hints (for resume)
+  void setHintsUsed(int value) {
+    _hintsUsed = value;
     notifyListeners();
   }
 }

@@ -4,28 +4,50 @@
 
 ## Yêu cầu hệ thống
 
-- Flutter SDK: ^3.11.4
-- Dart SDK: ^3.11.4
+- Flutter SDK: ^3.11.4 hoặc cao hơn
+- Dart SDK: ^3.11.4 hoặc cao hơn
 - Android Studio / Xcode (cho phát triển mobile)
 - VS Code hoặc Android Studio (khuyến nghị)
 
-## Cài đặt
+## Cài đặt Flutter SDK
 
-### 1. Cài đặt Flutter
+### Windows:
+1. Tải Flutter SDK từ [flutter.dev](https://flutter.dev/docs/get-started/install/windows)
+2. Giải nén vào thư mục (ví dụ: `C:\src\flutter`)
+3. Thêm Flutter vào PATH:
+   - Mở "Edit environment variables"
+   - Thêm `C:\src\flutter\bin` vào PATH
+4. Chạy `flutter doctor` để kiểm tra
 
-Nếu chưa cài Flutter, tải và cài đặt từ [flutter.dev](https://flutter.dev/docs/get-started/install)
+### macOS:
+1. Tải Flutter SDK từ [flutter.dev](https://flutter.dev/docs/get-started/install/macos)
+2. Giải nén và thêm vào PATH:
+   ```bash
+   export PATH="$PATH:`pwd`/flutter/bin"
+   ```
+3. Chạy `flutter doctor` để kiểm tra
 
-Kiểm tra cài đặt:
+### Linux:
+1. Tải Flutter SDK từ [flutter.dev](https://flutter.dev/docs/get-started/install/linux)
+2. Giải nén và thêm vào PATH
+3. Chạy `flutter doctor` để kiểm tra
+
+## Cài đặt dự án
+
+### 1. Clone repository
+
+```bash
+git clone https://github.com/Kousei2004/Sokudo_App.git
+cd Sokudo_App
+```
+
+### 2. Kiểm tra Flutter
+
 ```bash
 flutter doctor
 ```
 
-### 2. Clone dự án
-
-```bash
-git clone <repository-url>
-cd sudoku_app
-```
+Đảm bảo không có lỗi nghiêm trọng. Nếu có, làm theo hướng dẫn để sửa.
 
 ### 3. Cài đặt dependencies
 
@@ -116,6 +138,11 @@ flutter build linux --release
 
 ## Troubleshooting
 
+### Lỗi "flutter is not recognized"
+- Đảm bảo Flutter đã được thêm vào PATH
+- Khởi động lại terminal/command prompt
+- Chạy `flutter doctor` để kiểm tra
+
 ### Lỗi dependencies
 ```bash
 flutter clean
@@ -133,6 +160,10 @@ flutter pub get
 ```bash
 flutter devices
 ```
+
+### Lỗi "Could not find a Flutter SDK"
+- Cài đặt Flutter SDK theo hướng dẫn ở trên
+- Hoặc trong VS Code: Ctrl+Shift+P → "Flutter: Change SDK"
 
 ## Hỗ trợ
 

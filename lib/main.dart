@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'core/services/storage_service.dart';
 import 'core/services/level_service.dart';
 import 'core/services/settings_service.dart';
+import 'core/services/hive_service.dart';
 import 'core/theme/app_theme.dart';
 import 'features/game/presentation/providers/game_provider.dart';
 import 'features/game/presentation/providers/sudoku_provider.dart';
@@ -13,11 +14,17 @@ import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Khởi tạo storage
+  // Khởi tạo Hive (chạy trên Web + Mobile + Desktop)
+  await HiveService.instance.init();
+  
+  // Khởi tạo storage (vẫn cần cho một số dữ liệu tạm thời)
   await StorageService.instance.init();
   
   // Khởi tạo level service
   await LevelService().initialize();
+  
+  // Khởi tạo settings từ Hive
+  await SettingsService.instance.loadSettings();
   
   // Khóa màn hình dọc
   await SystemChrome.setPreferredOrientations([
