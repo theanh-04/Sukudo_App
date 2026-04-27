@@ -487,7 +487,7 @@ class _GamePageState extends State<GamePage> {
               // ===== BÀN SUDOKU 9x9 =====
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                  padding: const EdgeInsets.fromLTRB(4, 4, 4, 0),
                   child: Center(
                     // AspectRatio 1:1 để bàn cờ luôn vuông
                     child: AspectRatio(
@@ -498,12 +498,12 @@ class _GamePageState extends State<GamePage> {
                 ),
               ),
               
-              const SizedBox(height: 12),
+              const SizedBox(height: 2),
               
               // ===== GAME CONTROLS =====
               // Undo, Redo, Erase, Notes, Hint
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 2),
                 child: GameControls(
                   // Undo: Chỉ enable khi có thể undo
                   onUndo: sudoku.canUndo ? () => sudoku.undo() : null,
@@ -523,12 +523,12 @@ class _GamePageState extends State<GamePage> {
                 ),
               ),
               
-              const SizedBox(height: 8),
+              const SizedBox(height: 2),
               
               // ===== NUMBER PAD =====
               // Bàn phím số 1-9
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 4),
                 child: NumberPad(
                   // Callback khi chọn số
                   onNumberSelected: (number) {
@@ -539,7 +539,7 @@ class _GamePageState extends State<GamePage> {
                 ),
               ),
               
-              const SizedBox(height: 8),
+              const SizedBox(height: 2),
             ],
           );
         },

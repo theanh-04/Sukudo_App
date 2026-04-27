@@ -76,7 +76,7 @@ class GameControls extends StatelessWidget {
         onTap: onPressed,
         borderRadius: BorderRadius.circular(12),
         child: Padding(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(2),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -85,7 +85,7 @@ class GameControls extends StatelessWidget {
                 children: [
                   Icon(
                     icon,
-                    size: 32,
+                    size: 24,
                     color: isEnabled
                         ? (isActive
                             ? const Color(0xFF005BC1)
@@ -98,16 +98,16 @@ class GameControls extends StatelessWidget {
                       top: -4,
                       right: -4,
                       child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                        padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 1),
                         decoration: BoxDecoration(
                           color: const Color(0xFF005BC1),
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: Colors.white, width: 2),
+                          borderRadius: BorderRadius.circular(6),
+                          border: Border.all(color: Colors.white, width: 1.5),
                         ),
                         child: const Text(
                           'ON',
                           style: TextStyle(
-                            fontSize: 8,
+                            fontSize: 7,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
@@ -120,18 +120,18 @@ class GameControls extends StatelessWidget {
                       top: -4,
                       right: -4,
                       child: Container(
-                        width: 18,
-                        height: 18,
+                        width: 16,
+                        height: 16,
                         decoration: BoxDecoration(
                           color: isEnabled ? const Color(0xFF005BC1) : Colors.grey,
                           shape: BoxShape.circle,
-                          border: Border.all(color: Colors.white, width: 2),
+                          border: Border.all(color: Colors.white, width: 1.5),
                         ),
                         child: Center(
                           child: Text(
                             badgeText,
                             style: const TextStyle(
-                              fontSize: 10,
+                              fontSize: 9,
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
                             ),
@@ -141,13 +141,13 @@ class GameControls extends StatelessWidget {
                     ),
                 ],
               ),
-              const SizedBox(height: 4),
+              const SizedBox(height: 1),
               Text(
                 label.toUpperCase(),
                 style: TextStyle(
-                  fontSize: 10,
+                  fontSize: 8,
                   fontWeight: FontWeight.w600,
-                  letterSpacing: 0.5,
+                  letterSpacing: 0.3,
                   color: isEnabled
                       ? const Color(0xFF747C80)
                       : const Color(0xFFACB3B7),

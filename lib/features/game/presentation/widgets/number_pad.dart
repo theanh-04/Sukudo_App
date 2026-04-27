@@ -32,16 +32,16 @@ class NumberPad extends StatelessWidget {
           color: const Color(0xFFDCE4E8).withValues(alpha: 0.15),
         ),
       ),
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(4),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           // Hàng 1: 1 2 3
           _buildNumberRow(context, [1, 2, 3], isDark),
-          const SizedBox(height: 6),
+          const SizedBox(height: 3),
           // Hàng 2: 4 5 6
           _buildNumberRow(context, [4, 5, 6], isDark),
-          const SizedBox(height: 6),
+          const SizedBox(height: 3),
           // Hàng 3: 7 8 9
           _buildNumberRow(context, [7, 8, 9], isDark),
         ],
@@ -81,7 +81,7 @@ class NumberPad extends StatelessWidget {
         onTap: () => onNumberSelected(number),
         borderRadius: BorderRadius.circular(10),
         child: Container(
-          height: 48, // Chiều cao cố định, nhỏ hơn
+          height: 38, // Chiều cao cố định, nhỏ hơn nữa
           decoration: BoxDecoration(
             gradient: isSelected
                 ? const LinearGradient(
@@ -111,7 +111,7 @@ class NumberPad extends StatelessWidget {
             child: Text(
               number.toString(),
               style: TextStyle(
-                fontSize: 20, // Font nhỏ hơn
+                fontSize: 17, // Font nhỏ hơn nữa
                 fontWeight: isSelected ? FontWeight.w800 : FontWeight.bold,
                 color: isSelected
                     ? Colors.white

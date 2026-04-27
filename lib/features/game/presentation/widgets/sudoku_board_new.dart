@@ -129,7 +129,7 @@ class SudokuBoardNew extends StatelessWidget {
               ? Text(
                   cell.number.toString(),
                   style: TextStyle(
-                    fontSize: isSelected ? 24 : 20,
+                    fontSize: isSelected ? 28 : 24,
                     fontWeight: cell.initial ? FontWeight.bold : FontWeight.w600,
                     color: textColor,
                   ),
